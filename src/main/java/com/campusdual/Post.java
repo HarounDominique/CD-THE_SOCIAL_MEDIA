@@ -12,6 +12,7 @@ public class Post {
     /**
      * FIELDS
      **/
+    private int id;
     private Date date;
     private ArrayList<Comment> comments;
     private StringContentPost stringContentPost;
@@ -23,18 +24,21 @@ public class Post {
      * CONSTRUCTORS
      **/
     public Post(Date date, StringContentPost stringContentPost, User creator) {
+        this.id = 1;
         this.date = date;
         this.stringContentPost = stringContentPost;
         this.creator = creator;
     }
 
     public Post(Date date, ImageContentPost imageContentPost, User creator) {
+        this.id = 2;
         this.date = date;
         this.imageContentPost = imageContentPost;
         this.creator = creator;
     }
 
     public Post(Date date, VideoContentPost videoContentPost, User creator) {
+        this.id = 3;
         this.date = date;
         this.videoContentPost = videoContentPost;
         this.creator = creator;
@@ -43,6 +47,15 @@ public class Post {
     /**
      * METHODS
      **/
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Date getDate() {
         return date;
     }
@@ -96,6 +109,10 @@ public class Post {
      **/
     public void addComment(Comment c) {
         this.comments.add(c);
+    }
+
+    public int commentNumber(){
+        return this.comments.size();
     }
 
 }

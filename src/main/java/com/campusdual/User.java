@@ -3,14 +3,14 @@ package com.campusdual;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/**USER CLASS**/
 public class User {
-    //FIELDS
+    /**FIELDS**/
     private String name;
     private ArrayList<User> followedUsers;
     private ArrayList<Post> posts;
+    private ArrayList<Comment> comments;
 
-    //METHODS
+    /**METHODS**/
 
     public User(String name, ArrayList<User> follows, ArrayList<Post> posts) {
         this.name = name;
@@ -42,6 +42,14 @@ public class User {
         this.posts = posts;
     }
 
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<Comment> comments) {
+        this.comments = comments;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -51,9 +59,19 @@ public class User {
                 '}';
     }
 
-    //CUSTOM METHODS
-    public void follow(User u){
-        this.followedUsers.add(u);
+    /**CUSTOM METHODS**/
+    public boolean follow(User u){
+        boolean followed = false;
+        for(User user : followedUsers){
+            if(user.equals(u)){
+                followed = false;
+                break;
+            }else{
+                this.followedUsers.add(u);
+                followed = true;
+            }
+        }
+        return followed;
     }
 
         /*
@@ -81,5 +99,29 @@ public class User {
             }
         }
         return removed;
+    }
+
+    public ArrayList<Post> showAllPost(){
+        return getPosts();
+    }
+
+    public ArrayList<Comment> showAllComments(){
+        return getComments();
+    }
+
+    public void showUserWall(){
+        int counter = 0;
+        TheSocialMedia tsm = new TheSocialMedia();
+        Iterator<Post> iterator = tsm.getPostList().iterator();
+        while(counter<10 && iterator.hasNext() ){
+            for(Post p : tsm.getPostList()){
+                for(User u : this.followedUsers){
+                    if (p.getCreator().equals(u)){
+                        System.out.println("Author: "+p.getCreator()+"\nContent: "+ p);
+                        counter++;
+                    }
+                }
+            }
+        }
     }
 }

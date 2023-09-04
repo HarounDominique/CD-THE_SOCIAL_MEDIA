@@ -17,6 +17,9 @@ public class TheSocialMedia {
         this.commentList = commentList;
     }
 
+    public TheSocialMedia() {
+    }
+
     /**GETTERS AND SETTERS**/
     public ArrayList<User> getUserList() {
         return userList;
