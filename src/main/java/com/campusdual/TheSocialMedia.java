@@ -3,15 +3,23 @@ package com.campusdual;
 import java.util.*;
 
 public class TheSocialMedia {
+    /**ATTRIBUTES**/
+    ArrayList<User> userList = null;
+    ArrayList<Post> postList = null;
+    ArrayList<Comment> commentList = null;
+
     /**USER CLASS**/
     private class User {
+        //FIELDS
         private String name;
-        private ArrayList<User> follows;
+        private ArrayList<User> followedUsers;
         private ArrayList<Post> posts;
+
+        //METHODS
 
         public User(String name, ArrayList<User> follows, ArrayList<Post> posts) {
             this.name = name;
-            this.follows = follows;
+            this.followedUsers = follows;
             this.posts = posts;
         }
 
@@ -23,12 +31,12 @@ public class TheSocialMedia {
             this.name = name;
         }
 
-        public ArrayList<User> getFollows() {
-            return follows;
+        public ArrayList<User> getFollowedUsers() {
+            return followedUsers;
         }
 
-        public void setFollows(ArrayList<User> follows) {
-            this.follows = follows;
+        public void setFollowedUsers(ArrayList<User> followedUsers) {
+            this.followedUsers = followedUsers;
         }
 
         public ArrayList<Post> getPosts() {
@@ -43,9 +51,41 @@ public class TheSocialMedia {
         public String toString() {
             return "User{" +
                     "name='" + name + '\'' +
-                    ", follows=" + follows +
+                    ", follows=" + followedUsers +
                     ", posts=" + posts +
                     '}';
+        }
+
+        //CUSTOM METHODS
+        public void follow(User u){
+            this.followedUsers.add(u);
+        }
+
+        /*
+        public boolean unfollow(User u){
+            boolean removed = false;
+            for(User user : followedUsers){
+                if(user.equals(u)){
+                    followedUsers.remove(user);
+                    removed = true;
+                    break;
+                }
+            }
+            return removed;
+        }
+        */
+
+        public boolean unfollow(User u) {
+            Iterator<User> iterator = followedUsers.iterator();
+            boolean removed = false;
+            while (iterator.hasNext()) {
+                User user = iterator.next();
+                if (user.equals(u)) {
+                    iterator.remove();
+                    removed = true;
+                }
+            }
+            return removed;
         }
     }
 
@@ -232,18 +272,98 @@ public class TheSocialMedia {
         }
     }
 
-    /**POST CLASS**/
-    private class Post{
-        private Date date;
-        private ArrayList<Comment> comments;
-        private StringContentPost stringContentPost;
-        private ImageContentPost imageContentPost;
-        private VideoContentPost videoContentPost;
-    }
+    
 
     /**----------------------------------------METHODS----------------------------------------**/
 
+    /**CONSTRUCTOR**/
+    public TheSocialMedia(ArrayList<User> userList, ArrayList<Post> postList, ArrayList<Comment> commentList) {
+        this.userList = userList;
+        this.postList = postList;
+        this.commentList = commentList;
+    }
 
+    /**GETTERS AND SETTERS**/
+    public ArrayList<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(ArrayList<User> userList) {
+        this.userList = userList;
+    }
+
+    public ArrayList<Post> getPostList() {
+        return postList;
+    }
+
+    public void setPostList(ArrayList<Post> postList) {
+        this.postList = postList;
+    }
+
+    public ArrayList<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(ArrayList<Comment> commentList) {
+        this.commentList = commentList;
+    }
+
+    @Override
+    public String toString() {
+        return "TheSocialMedia{" +
+                "userList=" + userList +
+                ", postList=" + postList +
+                ", commentList=" + commentList +
+                '}';
+    }
+
+    /**CUSTOM METHODS**/
+    public boolean removeUser(User u){
+        boolean userRemoved = false;
+        Iterator<User> iterator = this.userList.iterator();
+        while (iterator.hasNext()) {
+            User dummyUser = iterator.next();
+            if (dummyUser.equals(u)) {
+                iterator.remove();
+                userRemoved = true;
+            }
+        }
+        return userRemoved;
+    }
+
+    public boolean removePost(Post p){
+        boolean postRemoved = false;
+        Iterator<Post> iterator = this.postList.iterator();
+        while (iterator.hasNext()) {
+            Post dummyPost = iterator.next();
+            if (dummyPost.equals(p)) {
+                iterator.remove();
+                postRemoved = true;
+            }
+        }
+        return postRemoved;
+    }
+
+    public boolean removeComment(Comment c){
+        boolean commentRemoved = false;
+        Iterator<Comment> iterator = this.commentList.iterator();
+        while (iterator.hasNext()) {
+            Comment dummyComment = iterator.next();
+            if (dummyComment.equals(c)) {
+                iterator.remove();
+                commentRemoved = true;
+            }
+        }
+        return commentRemoved;
+    }
+
+
+
+    public static void main(String[] args) {
+
+    }
 
 }
+
+
 
