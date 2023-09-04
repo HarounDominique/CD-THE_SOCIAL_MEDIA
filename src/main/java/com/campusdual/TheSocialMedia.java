@@ -90,13 +90,6 @@ public class TheSocialMedia {
         }
         return commentRemoved;
     }
-
-
-
-    public static void main(String[] args) {
-
-    }
-
 }
 
 
