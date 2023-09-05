@@ -59,12 +59,36 @@ public class TheSocialMedia {
         this.commentList = commentList;
     }
 
+    public ArrayList<String> getMailList() {
+        return mailList;
+    }
+
+    public void setMailList(ArrayList<String> mailList) {
+        this.mailList = mailList;
+    }
+
+    public ArrayList<String> getNameList() {
+        return nameList;
+    }
+
+    public void setNameList(ArrayList<String> nameList) {
+        this.nameList = nameList;
+    }
+
+    public ArrayList<String> getPassList() {
+        return passList;
+    }
+
+    public void setPassList(ArrayList<String> passList) {
+        this.passList = passList;
+    }
+
     @Override
     public String toString() {
-        return "TheSocialMedia{" +
-                "userList=" + userList +
-                ", postList=" + postList +
-                ", commentList=" + commentList +
+        return "TheSocialMedia{" + "\n" +
+                "userList=" + userList + "\n" +
+                ", postList=" + postList + "\n" +
+                ", commentList=" + commentList + "\n" +
                 '}';
     }
 
@@ -116,7 +140,7 @@ public class TheSocialMedia {
                 ui();
             }
         }
-        if(control){
+        if (control) {
             System.exit(0);
         }
         do {
@@ -138,14 +162,14 @@ public class TheSocialMedia {
             }
         } while (!validName);
 
-        do{
+        do {
             System.out.println("*********************     LOGIN      *********************");
             System.out.println("*                                                        *");
             System.out.println("*               Insert your USER PASSWORD                *");
             System.out.println("*                                                        *");
             System.out.print("* >>> ");
             userPass = Input.string();
-            if(!userPass.trim().isEmpty()){
+            if (!userPass.trim().isEmpty()) {
                 String userPass2;
                 System.out.println("*********************     LOGIN      *********************");
                 System.out.println("*                                                        *");
@@ -153,10 +177,10 @@ public class TheSocialMedia {
                 System.out.println("*                                                        *");
                 System.out.print("* >>> ");
                 userPass2 = Input.string();
-                if(userPass2.equals(userPass)){
+                if (userPass2.equals(userPass)) {
                     validPass = true;
                     //break;
-                }else{
+                } else {
                     System.out.println("INVALID PASSWORD: NO MATCHING PASSWORDS");
                     try {
                         Thread.sleep(2000);
@@ -165,7 +189,7 @@ public class TheSocialMedia {
                     }
                     //DO I NEED A BREAK? (GOT IT?)
                 }
-            }else{
+            } else {
                 System.out.println("INVALID PASSWORD: NO EMPTY FIELDS");
                 try {
                     Thread.sleep(2000);
@@ -174,9 +198,9 @@ public class TheSocialMedia {
                 }
             }
 
-        }while(!validPass);
+        } while (!validPass);
 
-        if(validPass){
+        if (validPass) {
             User u = new User(userName, userMail, userPass);
             this.userList.add(u);
             this.mailList.add(userMail);
@@ -187,7 +211,7 @@ public class TheSocialMedia {
         return validPass;
     }
 
-    public void signin(){
+    public void signin() {
 
         boolean control = false;
 
@@ -223,26 +247,25 @@ public class TheSocialMedia {
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
-                }else {
-                    int mailIndex = mailList.indexOf(userMail);
-                    int passIndex = passList.indexOf(userPass);
-                    if(mailIndex == passIndex){
-                        matchingUser = true;
-                        User u = this.userList.get(mailIndex);
-                        loggedUi(u);
-                    }else{
-                        System.out.println("THERE IS NO USER THAT MATCHES THOSE DATA");
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
+                } else {
+                    for (User u : this.userList) {
+                        if (u.getMail().equals(userMail) && u.getPass().equals(userPass)) {
+                            matchingUser = true;
+                            loggedUi(u);
+                        } else {
+                            System.out.println("THERE IS NO USER THAT MATCHES THOSE DATA");
+                            try {
+                                Thread.sleep(2000);
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                            control = true;
+                            ui();
                         }
-                        control = true;
-                        ui();
                     }
                 }
             }
-            if(control){
+            if (control) {
                 System.exit(0);
             }
         } while (!matchingUser);
@@ -302,7 +325,7 @@ public class TheSocialMedia {
             System.out.println("*              Insert '3' to SHOW USER LIST              *");
             System.out.print("* >>> ");
             String answer = Input.string();
-            switch (answer.trim()){
+            switch (answer.trim()) {
                 case "0":
                     on = false;
                     System.exit(0);
@@ -315,20 +338,28 @@ public class TheSocialMedia {
                     break;
                 case "3":
                     System.out.println(toString());
+                default:
+                    System.out.println("NON-EXISTENT COMMAND");
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
             }
         } while (on);
     }
 
-    public void loggedUi(User u){
+    public void loggedUi(User u) {
         boolean control = false;
 
         boolean on = true;
         String userName = u.getName();
-        System.out.println("WELCOME BACK "+userName);
+        System.out.println("WELCOME BACK " + userName);
         do {
             System.out.println("*********************THE SOCIAL MEDIA*********************");
             System.out.println("**********************************************************");
-            System.out.println("* USER: "+userName+ " | STATUS: LOGGED");
+            System.out.println("* USER: " + userName + " | STATUS: LOGGED");
             System.out.println("*                                                        *");
             System.out.println("*                  Insert '0' to LOGOUT                  *");
             System.out.println("*                                                        *");
@@ -339,10 +370,16 @@ public class TheSocialMedia {
             System.out.println("*           Insert '3' to SHOW USER LIST (DEBUG)         *");
             System.out.print("* >>> ");
             String answer = Input.string();
-            switch (answer.trim()){
+            switch (answer.trim()) {
                 case "0":
                     on = false;
-
+                    System.out.println("LOGGIN OUT");
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    ui();
                     break;
                 case "1":
                     postsMenu(u);
@@ -352,18 +389,121 @@ public class TheSocialMedia {
                     break;
                 case "3":
                     System.out.println(toString());
+                default:
+                    System.out.println("NON-EXISTENT COMMAND");
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
             }
-            if(control){
+            if (control) {
                 System.exit(0);
             }
         } while (on);
     }
 
-    public void postsMenu(User u){
+    public void postsMenu(User u) {
+        boolean control = false;
 
+        boolean on = true;
+        String userName = u.getName();
+        System.out.println("WELCOME BACK " + userName);
+        do {
+            System.out.println("*********************THE SOCIAL MEDIA*********************");
+            System.out.println("*********************   POSTS MENU   *********************");
+            System.out.println("* USER: " + userName + " | STATUS: LOGGED");
+            System.out.println("*                                                        *");
+            System.out.println("*                  Insert '0' to GO BACK                 *");
+            System.out.println("*                                                        *");
+            System.out.println("*                 Insert '1' for NEW POSTS               *");
+            System.out.println("*                                                        *");
+            System.out.println("*            Insert '2' to SHOW ALL YOUR POSTS           *");
+            System.out.println("*                                                        *");
+            System.out.println("*           Insert '3' to SHOW USER LIST (DEBUG)         *");
+            System.out.print("* >>> ");
+            String answer = Input.string();
+            switch (answer.trim()) {
+                case "0":
+                    on = false;
+                    control = true;
+                    loggedUi(u);
+                    break;
+                case "1":
+                    newPost(u);
+                    break;
+                case "2":
+                    usersMenu(u);
+                    break;
+                case "3":
+                    System.out.println(toString());
+                default:
+                    System.out.println("NON-EXISTENT COMMAND");
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
+            }
+            if (control) {
+                System.exit(0);
+            }
+        } while (on);
     }
 
-    public void usersMenu(User u){
+    public void newPost(User u) {
+        boolean control = false;
+
+        boolean on = true;
+        String userName = u.getName();
+        System.out.println("WELCOME BACK " + userName);
+        do {
+            System.out.println("*********************THE SOCIAL MEDIA*********************");
+            System.out.println("*********************   POSTS MENU   *********************");
+            System.out.println("*********************    NEW POST    *********************");
+            System.out.println("* USER: " + userName + " | STATUS: LOGGED");
+            System.out.println("*                                                        *");
+            System.out.println("*                  Insert '0' to GO BACK                 *");
+            System.out.println("*                                                        *");
+            System.out.println("*                 Insert '1' for NEW POSTS               *");
+            System.out.println("*                                                        *");
+            System.out.println("*            Insert '2' to SHOW ALL YOUR POSTS           *");
+            System.out.println("*                                                        *");
+            System.out.println("*           Insert '3' to SHOW USER LIST (DEBUG)         *");
+            System.out.print("* >>> ");
+            String answer = Input.string();
+            switch (answer.trim()) {
+                case "0":
+                    on = false;
+                    control = true;
+                    postsMenu(u);
+                    break;
+                case "1":
+                    newPost(u);
+                    break;
+                case "2":
+                    usersMenu(u);
+                    break;
+                case "3":
+                    System.out.println(toString());
+                default:
+                    System.out.println("NON-EXISTENT COMMAND");
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
+            }
+            if (control) {
+                System.exit(0);
+            }
+        } while (on);
+    }
+
+    public void usersMenu(User u) {
 
     }
 }
