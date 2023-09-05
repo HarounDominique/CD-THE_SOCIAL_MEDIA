@@ -1,6 +1,8 @@
 package com.campusdual;
 
+import java.sql.SQLOutput;
 import java.util.*;
+import com.campusdual.util.Input;
 
 public class TheSocialMedia {
     /**----------ATTRIBUTES----------**/
@@ -92,6 +94,25 @@ public class TheSocialMedia {
             }
         }
         return commentRemoved;
+    }
+
+    public void ui(){
+        boolean on = true;
+        do{
+            System.out.println("*********************THE SOCIAL MEDIA*********************");
+            System.out.println("*                                                        *");
+            System.out.println("*                   Insert '0' to EXIT                   *");
+            System.out.println("*                                                        *");
+            System.out.println("*                   Insert '1' to LOGIN                  *");
+            System.out.println("*                                                        *");
+            System.out.println("*                  Insert '2' to SIGN IN                 *");
+            System.out.print("* >>> ");
+            String answer = Input.string();
+            if(answer.trim().equals("0")){
+                System.out.println("BYE");
+                on = false;
+            }
+        }while(on);
     }
 }
 
