@@ -1,20 +1,25 @@
 package com.campusdual;
 
 import java.util.*;
+
 import com.campusdual.util.Input;
 
 public class TheSocialMedia {
-    /**----------ATTRIBUTES----------**/
-    ArrayList<User> userList = null;
-    ArrayList<Post> postList = null;
-    ArrayList<Comment> commentList = null;
-    ArrayList<String> mailList = null;
-    ArrayList<String> nameList = null;
-    ArrayList<String> passList = null;
+    /**
+     * ----------ATTRIBUTES----------
+     **/
+    ArrayList<User> userList = new ArrayList<>();
+    ArrayList<Post> postList = new ArrayList<>();
+    ArrayList<Comment> commentList = new ArrayList<>();
+    ArrayList<String> mailList = new ArrayList<>();
+    ArrayList<String> nameList = new ArrayList<>();
+    ArrayList<String> passList = new ArrayList<>();
 
     /**----------METHODS----------**/
 
-    /**CONSTRUCTOR**/
+    /**
+     * CONSTRUCTOR
+     **/
     public TheSocialMedia(ArrayList<User> userList, ArrayList<Post> postList, ArrayList<Comment> commentList, ArrayList<String> mailList, ArrayList<String> nameList, ArrayList<String> passList) {
         this.userList = userList;
         this.postList = postList;
@@ -27,7 +32,9 @@ public class TheSocialMedia {
     public TheSocialMedia() {
     }
 
-    /**GETTERS AND SETTERS**/
+    /**
+     * GETTERS AND SETTERS
+     **/
     public ArrayList<User> getUserList() {
         return userList;
     }
@@ -61,14 +68,20 @@ public class TheSocialMedia {
                 '}';
     }
 
-    /**CUSTOM METHODS**/
-    public boolean addUser(){
+    /**
+     * CUSTOM METHODS
+     **/
+    public boolean addUser() {
         String userMail;
         String userName;
         String userPass;
 
         boolean validMail = false;
-        boolean uniqueMail = false;
+        boolean validName = false;
+        boolean validPass = false;
+
+        boolean control = false;
+
         do {
             System.out.println("*********************     LOGIN      *********************");
             System.out.println("*                                                        *");
@@ -76,66 +89,104 @@ public class TheSocialMedia {
             System.out.println("*                                                        *");
             System.out.print("* >>> ");
             userMail = Input.string();
-            if (userMail.trim().isEmpty()){
-                System.out.println("INVALID EMAIL");
+            if (userMail.trim().isEmpty()) {
+                System.out.println("INVALID EMAIL: NO EMPTY FIELDS");
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                System.out.print("\033[1A"); // Mueve el cursor una línea hacia arriba
-                System.out.print("\033[2K"); // Borra la línea actual
-            }else{
+            } else {
                 validMail = true;
             }
-        }while(!validMail);
+        } while (!validMail);
 
+        Iterator<String> iterator = this.mailList.iterator();
+        while (iterator.hasNext()) {
+            String dummyMail = iterator.next();
+            if (dummyMail.equals(userMail)) {
+                System.out.println("USER MAIL ALREADY IN USE");
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                control = true;
+                ui();
+            }
+        }
+        if(control){
+            System.exit(0);
+        }
+        do {
+            System.out.println("*********************     LOGIN      *********************");
+            System.out.println("*                                                        *");
+            System.out.println("*                 Insert your USER NAME                  *");
+            System.out.println("*                                                        *");
+            System.out.print("* >>> ");
+            userName = Input.string();
+            if (userName.trim().isEmpty()) {
+                System.out.println("INVALID NAME: NO EMPTY FIELDS");
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                validName = true;
+            }
+        } while (!validName);
 
-            Iterator<String> iterator = this.mailList.iterator();
-            while (iterator.hasNext()) {
-                String dummyMail = iterator.next();
-                if (dummyMail.equals(userMail)) {
-                    System.out.println("USER MAIL ALREADY IN USE");
+        do{
+            System.out.println("*********************     LOGIN      *********************");
+            System.out.println("*                                                        *");
+            System.out.println("*               Insert your USER PASSWORD                *");
+            System.out.println("*                                                        *");
+            System.out.print("* >>> ");
+            userPass = Input.string();
+            if(!userPass.trim().isEmpty()){
+                String userPass2;
+                System.out.println("*********************     LOGIN      *********************");
+                System.out.println("*                                                        *");
+                System.out.println("*               Repeat your USER PASSWORD                *");
+                System.out.println("*                                                        *");
+                System.out.print("* >>> ");
+                userPass2 = Input.string();
+                if(userPass2.equals(userPass)){
+                    validPass = true;
+                    //break;
+                }else{
+                    System.out.println("INVALID PASSWORD: NO MATCHING PASSWORDS");
                     try {
                         Thread.sleep(2000);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
-                    System.out.print("\033[1A"); // Mueve el cursor una línea hacia arriba
-                    System.out.print("\033[2K"); // Borra la línea actual
-                    ui();
-                } else {
-                    uniqueMail = true;
+                    //DO I NEED A BREAK? (GOT IT?)
+                }
+            }else{
+                System.out.println("INVALID PASSWORD: NO EMPTY FIELDS");
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             }
-                boolean validName = false;
-                do {
-                    System.out.println("*********************     LOGIN      *********************");
-                    System.out.println("*                                                        *");
-                    System.out.println("*                 Insert your USER NAME                  *");
-                    System.out.println("*                                                        *");
-                    System.out.print("* >>> ");
-                    userName = Input.string();
-                    if (userName.trim().isEmpty()) {
-                        System.out.println("INVALID NAME");
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                        System.out.print("\033[1A"); // Mueve el cursor una línea hacia arriba
-                        System.out.print("\033[2K"); // Borra la línea actual
-                    } else {
-                        validName = true;
-                    }
-                } while (!validName);
-                //INSERT PASSWORD
 
+        }while(!validPass);
+
+        if(validPass){
+            User u = new User(userName, userMail, userPass);
+            this.userList.add(u);
+            this.mailList.add(userMail);
+            this.nameList.add(userName);
+            this.passList.add(userPass);
+        }
 
         return validPass;
     }
 
-    public boolean removeUser(User u){
+    public boolean removeUser(User u) {
         boolean userRemoved = false;
         Iterator<User> iterator = this.userList.iterator();
         while (iterator.hasNext()) {
@@ -148,7 +199,7 @@ public class TheSocialMedia {
         return userRemoved;
     }
 
-    public boolean removePost(Post p){
+    public boolean removePost(Post p) {
         boolean postRemoved = false;
         Iterator<Post> iterator = this.postList.iterator();
         while (iterator.hasNext()) {
@@ -161,7 +212,7 @@ public class TheSocialMedia {
         return postRemoved;
     }
 
-    public boolean removeComment(Comment c){
+    public boolean removeComment(Comment c) {
         boolean commentRemoved = false;
         Iterator<Comment> iterator = this.commentList.iterator();
         while (iterator.hasNext()) {
@@ -174,9 +225,9 @@ public class TheSocialMedia {
         return commentRemoved;
     }
 
-    public void ui(){
+    public void ui() {
         boolean on = true;
-        do{
+        do {
             System.out.println("*********************THE SOCIAL MEDIA*********************");
             System.out.println("*                                                        *");
             System.out.println("*                   Insert '0' to EXIT                   *");
@@ -184,13 +235,19 @@ public class TheSocialMedia {
             System.out.println("*                   Insert '1' to LOGIN                  *");
             System.out.println("*                                                        *");
             System.out.println("*                  Insert '2' to SIGN IN                 *");
+            System.out.println("*                                                        *");
+            System.out.println("*              Insert '3' to SHOW USER LIST              *");
             System.out.print("* >>> ");
             String answer = Input.string();
-            if(answer.trim().equals("0")){
+            if (answer.trim().equals("0")) {
                 System.out.println("BYE");
                 on = false;
+            }else if(answer.trim().equals("1")){
+                addUser();
+            }else if(answer.trim().equals("3")){
+                System.out.println(toString());
             }
-        }while(on);
+        } while (on);
     }
 }
 

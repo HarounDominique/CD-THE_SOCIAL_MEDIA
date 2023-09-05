@@ -6,16 +6,46 @@ import java.util.Iterator;
 public class User {
     /**FIELDS**/
     private String name;
+    private String mail;
+    private String pass;
     private ArrayList<User> followedUsers;
     private ArrayList<Post> posts;
     private ArrayList<Comment> comments;
 
     /**METHODS**/
-
-    public User(String name, ArrayList<User> follows, ArrayList<Post> posts) {
+    public User(String name, String mail, String pass, ArrayList<User> followedUsers, ArrayList<Post> posts, ArrayList<Comment> comments) {
         this.name = name;
-        this.followedUsers = follows;
+        this.mail = mail;
+        this.pass = pass;
+        this.followedUsers = followedUsers;
         this.posts = posts;
+        this.comments = comments;
+    }
+
+    public User(String name, String mail, String pass) {
+        this.name = name;
+        this.mail = mail;
+        this.pass = pass;
+    }
+
+    public User() {
+
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
     public String getName() {
@@ -54,8 +84,8 @@ public class User {
     public String toString() {
         return "User{" +
                 "name='" + name + '\'' +
-                ", follows=" + followedUsers +
-                ", posts=" + posts +
+                ", mail='" + mail + '\'' +
+                ", pass='" + pass + '\'' +
                 '}';
     }
 
