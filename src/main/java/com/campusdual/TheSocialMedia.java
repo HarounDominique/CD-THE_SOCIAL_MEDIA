@@ -325,7 +325,7 @@ public class TheSocialMedia {
             System.out.println("*                                                        *");
             System.out.println("*                  Insert '2' to SIGN IN                 *");
             System.out.println("*                                                        *");
-            System.out.println("*              Insert '3' to SHOW USER LIST              *");
+            System.out.println("*               Insert '3' to SHOW USER LIST             *");
             System.out.print("* >>> ");
             String answer = Input.string();
             switch (answer.trim()) {
@@ -424,7 +424,7 @@ public class TheSocialMedia {
             System.out.println("*                                                        *");
             System.out.println("*                 Insert '1' for NEW POSTS               *");
             System.out.println("*                                                        *");
-            System.out.println("*            Insert '2' to SHOW ALL YOUR POSTS           *");
+            System.out.println("*             Insert '2' to SHOW ALL YOUR POSTS          *");
             System.out.println("*                                                        *");
             System.out.print("* >>> ");
             String answer = Input.string();
@@ -504,6 +504,9 @@ public class TheSocialMedia {
                             Date d = c.getTime();
                             Post p = new Post(d, sp, u);
                             u.addPost(p);
+                            for(Post post : u.getPosts()){
+                                post.
+                            }
                     }
                     /*
                     String content = Input.string();
