@@ -10,6 +10,7 @@ public class Input {
 
     /**
      * Method to initialize input data.
+     *
      * @return input Buffered string data.
      */
     public static String init() {
@@ -26,6 +27,7 @@ public class Input {
 
     /**
      * Method to get an integer from input data.
+     *
      * @return integer entered by the user.
      */
     public static int integer() {
@@ -34,6 +36,7 @@ public class Input {
 
     /**
      * Method to get an integer from input data with a custom message.
+     *
      * @param message custom message for the user.
      * @return integer entered by the user.
      */
@@ -47,6 +50,7 @@ public class Input {
 
     /**
      * Method to get a real number from input data.
+     *
      * @return real number entered by the user.
      */
     public static double real() {
@@ -55,6 +59,7 @@ public class Input {
 
     /**
      * Method to get a real number from input data with a custom message.
+     *
      * @param message custom message for the user.
      * @return real number entered by the user.
      */
@@ -68,6 +73,7 @@ public class Input {
 
     /**
      * Method to get a text string from input data.
+     *
      * @return text string entered by the user.
      */
     public static String string() {
@@ -76,6 +82,7 @@ public class Input {
 
     /**
      * Method to get a text string from input data with a custom message.
+     *
      * @param message custom message for the user.
      * @return text string entered by the user.
      */
@@ -89,6 +96,7 @@ public class Input {
 
     /**
      * Method to get a character from input data.
+     *
      * @return character entered by the user.
      */
     public static char character() {
@@ -97,6 +105,7 @@ public class Input {
 
     /**
      * Method to get a character from input data with a custom message.
+     *
      * @param message custom message for the user.
      * @return character entered by the user.
      */
