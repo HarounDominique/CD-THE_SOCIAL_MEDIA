@@ -83,6 +83,7 @@ public class TheSocialMedia {
         boolean control = false;
 
         do {
+            System.out.println("*********************THE SOCIAL MEDIA*********************");
             System.out.println("*********************     LOGIN      *********************");
             System.out.println("*                                                        *");
             System.out.println("*                   Insert your EMAIL                    *");
@@ -194,6 +195,7 @@ public class TheSocialMedia {
         String userMail;
         String userPass;
         do {
+            System.out.println("*********************THE SOCIAL MEDIA*********************");
             System.out.println("*********************     SIGNIN     *********************");
             System.out.println("*                                                        *");
             System.out.println("*                    Insert your EMAIL                   *");
@@ -226,7 +228,8 @@ public class TheSocialMedia {
                     int passIndex = passList.indexOf(userPass);
                     if(mailIndex == passIndex){
                         matchingUser = true;
-                        loggedUi();
+                        User u = this.userList.get(mailIndex);
+                        loggedUi(u);
                     }else{
                         System.out.println("THERE IS NO USER THAT MATCHES THOSE DATA");
                         try {
@@ -288,6 +291,7 @@ public class TheSocialMedia {
         boolean on = true;
         do {
             System.out.println("*********************THE SOCIAL MEDIA*********************");
+            System.out.println("**********************************************************");
             System.out.println("*                                                        *");
             System.out.println("*                   Insert '0' to EXIT                   *");
             System.out.println("*                                                        *");
@@ -315,36 +319,52 @@ public class TheSocialMedia {
         } while (on);
     }
 
-    public void loggedUi(){
+    public void loggedUi(User u){
+        boolean control = false;
+
         boolean on = true;
+        String userName = u.getName();
+        System.out.println("WELCOME BACK "+userName);
         do {
             System.out.println("*********************THE SOCIAL MEDIA*********************");
             System.out.println("**********************************************************");
-            System.out.println("**********************YOU ARE LOGGED**********************");
-            System.out.println("*                   Insert '0' to EXIT                   *");
+            System.out.println("* USER: "+userName+ " | STATUS: LOGGED");
             System.out.println("*                                                        *");
-            System.out.println("*                   Insert '1' to LOGIN                  *");
+            System.out.println("*                  Insert '0' to LOGOUT                  *");
             System.out.println("*                                                        *");
-            System.out.println("*                  Insert '2' to SIGN IN                 *");
+            System.out.println("*           Insert '1' to enter the POSTS MENU           *");
             System.out.println("*                                                        *");
-            System.out.println("*              Insert '3' to SHOW USER LIST              *");
+            System.out.println("*           Insert '2' to enter the USERS MENU           *");
+            System.out.println("*                                                        *");
+            System.out.println("*           Insert '3' to SHOW USER LIST (DEBUG)         *");
             System.out.print("* >>> ");
             String answer = Input.string();
             switch (answer.trim()){
                 case "0":
                     on = false;
-                    System.exit(0);
+
                     break;
                 case "1":
-                    login();
+                    postsMenu(u);
                     break;
                 case "2":
-                    signin();
+                    usersMenu(u);
                     break;
                 case "3":
                     System.out.println(toString());
             }
+            if(control){
+                System.exit(0);
+            }
         } while (on);
+    }
+
+    public void postsMenu(User u){
+
+    }
+
+    public void usersMenu(User u){
+
     }
 }
 
