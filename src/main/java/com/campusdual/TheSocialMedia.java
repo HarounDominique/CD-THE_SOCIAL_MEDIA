@@ -2,6 +2,8 @@ package com.campusdual;
 
 import java.util.*;
 
+import com.campusdual.PostSupportClasses.ImageDimensions;
+import com.campusdual.PostTypeClasses.ImageContentPost;
 import com.campusdual.PostTypeClasses.StringContentPost;
 import com.campusdual.util.Input;
 
@@ -251,12 +253,12 @@ public class TheSocialMedia {
                         throw new RuntimeException(e);
                     }
                 } else {
-                    for (User u : this.userList) {
-                        if (u.getMail().equals(userMail) && u.getPass().equals(userPass)) {
+                    Iterator<User> iterator = this.userList.iterator();
+                    while (iterator.hasNext()) {
+                        User dummyUser = iterator.next();
+                        if (dummyUser.getMail().equals(userMail) && dummyUser.getPass().equals(userPass)) {
                             matchingUser = true;
-                            loggedUi(u);
-                        } else {
-                            System.out.println("THERE IS NO USER THAT MATCHES THOSE DATA");
+                            loggedUi(dummyUser);
                             try {
                                 Thread.sleep(2000);
                             } catch (InterruptedException e) {
@@ -475,8 +477,8 @@ public class TheSocialMedia {
             System.out.println("*                                                        *");
             System.out.println("*               Insert '3' for a VIDEO POST              *");
             System.out.print("* >>> ");
-            String answer = Input.string();
-            switch (answer.trim()) {
+            String newPostAnswer = Input.string();
+            switch (newPostAnswer.trim()) {
                 case "0":
                     on = false;
                     control = true;
@@ -493,29 +495,115 @@ public class TheSocialMedia {
                     System.out.println("*                   Or write your post:                  *");
                     System.out.println("*                                                        *");
                     System.out.print("* >>> ");
-                    String answer2 = Input.string();
-                    switch (answer2.trim()) {
+                    String textPostAnswer = Input.string();
+                    switch (textPostAnswer.trim()) {
                         case "0":
                             //control = true;
                             break;
                         default:
-                            StringContentPost sp = new StringContentPost(answer2);
+                            StringContentPost sp = new StringContentPost(textPostAnswer);
                             Calendar c = Calendar.getInstance();
                             Date d = c.getTime();
                             Post p = new Post(d, sp, u);
                             u.addPost(p);
+                            /*
                             for(Post post : u.getPosts()){
-                                post.
+                                //post.
+                            }
+
+                             */
+                            System.out.println("TEXT POSTED");
+                            try {
+                                Thread.sleep(2000);
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
                             }
                     }
-                    /*
-                    String content = Input.string();
-                    StringContentPost sp = new StringContentPost();
-                    u.getPosts().add()
                     break;
-                    */
+
                 case "2":
-                    // TODO: 05/09/2023 create a image post
+                    System.out.println("*********************THE SOCIAL MEDIA*********************");
+                    System.out.println("*********************   POSTS MENU   *********************");
+                    System.out.println("********************* NEW IMAGE POST *********************");
+                    System.out.println("* USER: " + userName + " | STATUS: LOGGED");
+                    System.out.println("*                                                        *");
+                    System.out.println("*                  Insert '0' to GO BACK                 *");
+                    System.out.println("*                                                        *");
+                    System.out.println("*              Or write the title of the post:           *");
+                    System.out.println("*                                                        *");
+                    System.out.print("* >>> ");
+                    String imagePostTitle = Input.string();
+                    switch (imagePostTitle.trim()) {
+                        case "0":
+                            //control = true;
+                            break;
+                        default:
+                            switch (imagePostTitle.trim()) {
+                                case "0":
+                                    break;
+                                default:
+
+                                    System.out.println("*********************THE SOCIAL MEDIA*********************");
+                                    System.out.println("*********************   POSTS MENU   *********************");
+                                    System.out.println("********************* NEW IMAGE POST *********************");
+                                    System.out.println("* USER: " + userName + " | STATUS: LOGGED");
+                                    System.out.println("*                                                        *");
+                                    System.out.println("*              Insert the width of the image             *");
+                                    System.out.println("*                                                        *");
+                                    System.out.print("* >>> ");
+                                    String imageWidthAnswer = Input.string();
+                                    int imageWidth = 600;
+                                    try {
+                                        imageWidth = Integer.parseInt(imageWidthAnswer);
+                                        // Continuar con el código si la conversión tiene éxito
+                                    } catch (NumberFormatException e) {
+                                        System.err.println("ERROR: COULD NOT CONVERT TO INTEGER. A DEFAULT VALUE WILL BE USED (600).");
+                                    }
+                                    imageWidth = 600;
+
+                                    try {
+                                        Thread.sleep(2000);
+                                    } catch (InterruptedException ex) {
+                                        throw new RuntimeException(ex);
+                                    }
+
+                                    System.out.println("*********************THE SOCIAL MEDIA*********************");
+                                    System.out.println("*********************   POSTS MENU   *********************");
+                                    System.out.println("********************* NEW IMAGE POST *********************");
+                                    System.out.println("* USER: " + userName + " | STATUS: LOGGED");
+                                    System.out.println("*                                                        *");
+                                    System.out.println("*             Insert the height of the image             *");
+                                    System.out.println("*                                                        *");
+                                    System.out.print("* >>> ");
+                                    String imageHeightAnswer = Input.string();
+                                    int imageHeight = 200;
+                                    try {
+                                        imageHeight = Integer.parseInt(imageHeightAnswer);
+                                        // Continuar con el código si la conversión tiene éxito
+                                    } catch (NumberFormatException e) {
+                                        System.err.println("ERROR: COULD NOT CONVERT TO INTEGER. A DEFAULT VALUE WILL BE USED (200).");
+                                    }
+                                    imageHeight = 200;
+
+                                    try {
+                                        Thread.sleep(2000);
+                                    } catch (InterruptedException ex) {
+                                        throw new RuntimeException(ex);
+                                    }
+
+                                    Calendar c = Calendar.getInstance();
+                                    Date d = c.getTime();
+
+                                    ImageDimensions id = new ImageDimensions(imageHeight, imageWidth);
+
+                                    ImageContentPost icp = new ImageContentPost(imagePostTitle, id);
+
+                                    Post p = new Post(d, icp, u);
+
+                                    u.addPost(p);
+                            }
+                            break;
+                    }
                     break;
                 case "3":
                     // TODO: 05/09/2023 create a video post
