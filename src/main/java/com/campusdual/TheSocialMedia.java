@@ -2,6 +2,7 @@ package com.campusdual;
 
 import java.util.*;
 
+import com.campusdual.PostTypeClasses.StringContentPost;
 import com.campusdual.util.Input;
 
 public class TheSocialMedia {
@@ -95,6 +96,8 @@ public class TheSocialMedia {
     /**
      * CUSTOM METHODS
      **/
+
+    //LOGIN AND SIGN IN
     public boolean login() {
         String userMail;
         String userName;
@@ -404,6 +407,8 @@ public class TheSocialMedia {
         } while (on);
     }
 
+    //POST METHODS
+
     public void postsMenu(User u) {
         boolean control = false;
 
@@ -421,7 +426,6 @@ public class TheSocialMedia {
             System.out.println("*                                                        *");
             System.out.println("*            Insert '2' to SHOW ALL YOUR POSTS           *");
             System.out.println("*                                                        *");
-            System.out.println("*           Insert '3' to SHOW USER LIST (DEBUG)         *");
             System.out.print("* >>> ");
             String answer = Input.string();
             switch (answer.trim()) {
@@ -436,8 +440,6 @@ public class TheSocialMedia {
                 case "2":
                     usersMenu(u);
                     break;
-                case "3":
-                    System.out.println(toString());
                 default:
                     System.out.println("NON-EXISTENT COMMAND");
                     try {
@@ -467,11 +469,11 @@ public class TheSocialMedia {
             System.out.println("*                                                        *");
             System.out.println("*                  Insert '0' to GO BACK                 *");
             System.out.println("*                                                        *");
-            System.out.println("*                 Insert '1' for NEW POSTS               *");
+            System.out.println("*               Insert '1' for a TEXT POSTS              *");
             System.out.println("*                                                        *");
-            System.out.println("*            Insert '2' to SHOW ALL YOUR POSTS           *");
+            System.out.println("*              Insert '2' for an IMAGE POSTS             *");
             System.out.println("*                                                        *");
-            System.out.println("*           Insert '3' to SHOW USER LIST (DEBUG)         *");
+            System.out.println("*               Insert '3' for a VIDEO POST              *");
             System.out.print("* >>> ");
             String answer = Input.string();
             switch (answer.trim()) {
@@ -481,13 +483,39 @@ public class TheSocialMedia {
                     postsMenu(u);
                     break;
                 case "1":
-                    newPost(u);
+                    System.out.println("*********************THE SOCIAL MEDIA*********************");
+                    System.out.println("*********************   POSTS MENU   *********************");
+                    System.out.println("********************* NEW TEXT POST  *********************");
+                    System.out.println("* USER: " + userName + " | STATUS: LOGGED");
+                    System.out.println("*                                                        *");
+                    System.out.println("*                  Insert '0' to GO BACK                 *");
+                    System.out.println("*                                                        *");
+                    System.out.println("*                   Or write your post:                  *");
+                    System.out.println("*                                                        *");
+                    System.out.print("* >>> ");
+                    String answer2 = Input.string();
+                    switch (answer2.trim()) {
+                        case "0":
+                            //control = true;
+                            break;
+                        default:
+                            StringContentPost sp = new StringContentPost(answer2);
+                            Calendar c = Calendar.getInstance();
+                            Date d = c.getTime();
+                            Post p = new Post(d, sp, u);
+                            u.addPost(p);
+                    }
+                    /*
+                    String content = Input.string();
+                    StringContentPost sp = new StringContentPost();
+                    u.getPosts().add()
                     break;
+                    */
                 case "2":
-                    usersMenu(u);
+                    // TODO: 05/09/2023 create a image post
                     break;
                 case "3":
-                    System.out.println(toString());
+                    // TODO: 05/09/2023 create a video post
                 default:
                     System.out.println("NON-EXISTENT COMMAND");
                     try {
@@ -503,8 +531,14 @@ public class TheSocialMedia {
         } while (on);
     }
 
-    public void usersMenu(User u) {
+    public void allPosts(User u) {
+// TODO: 05/09/2023
+    }
 
+
+    //USERS METHODS
+    public void usersMenu(User u) {
+// TODO: 05/09/2023
     }
 }
 

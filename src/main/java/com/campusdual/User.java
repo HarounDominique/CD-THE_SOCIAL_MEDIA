@@ -8,9 +8,9 @@ public class User {
     private String name;
     private String mail;
     private String pass;
-    private ArrayList<User> followedUsers;
-    private ArrayList<Post> posts;
-    private ArrayList<Comment> comments;
+    private ArrayList<User> followedUsers = new ArrayList<>();
+    private ArrayList<Post> posts = new ArrayList<>();
+    private ArrayList<Comment> comments = new ArrayList<>();
 
     /**METHODS**/
     public User(String name, String mail, String pass, ArrayList<User> followedUsers, ArrayList<Post> posts, ArrayList<Comment> comments) {
@@ -70,6 +70,9 @@ public class User {
 
     public void setPosts(ArrayList<Post> posts) {
         this.posts = posts;
+    }
+    public void addPost(Post p){
+        this.posts.add(p);
     }
 
     public ArrayList<Comment> getComments() {
