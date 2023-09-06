@@ -148,8 +148,7 @@ public class User {
         System.out.println("*                                                        *");
         System.out.println("*                  Insert '0' to GO BACK                 *");
         System.out.println("*                                                        *");
-        //System.out.print("* >>> ");
-        String answer = Input.string();
+
         while(iterator.hasNext()){
             index++;
             Post p = iterator.next();
@@ -211,6 +210,8 @@ public class User {
                     }
             }
         }
+        System.out.print("* >>> ");
+        String answer = Input.string();
     }
 
     public ArrayList<Comment> showAllComments(){
