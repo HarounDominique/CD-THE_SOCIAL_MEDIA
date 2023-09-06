@@ -134,8 +134,22 @@ public class User {
         return removed;
     }
 
-    public ArrayList<Post> showAllPost(){
-        return getPosts();
+    public void showAllPost(){
+        //return getPosts();
+        Iterator<Post> iterator = this.posts.iterator();
+        while(iterator.hasNext()){
+            Post p = iterator.next();
+            switch (p.getId()){
+                case 1:
+                    //string post
+                    //todo show the post properly
+
+                case 2:
+                    //image post
+                case 3:
+                    //video post
+            }
+        }
     }
 
     public ArrayList<Comment> showAllComments(){

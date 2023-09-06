@@ -130,24 +130,26 @@ public class TheSocialMedia {
                     throw new RuntimeException(e);
                 }
             } else {
-                validMail = true;
+                Iterator<String> iterator = this.mailList.iterator();
+                while (iterator.hasNext()) {
+                    String dummyMail = iterator.next();
+                    if (dummyMail.equals(userMail.trim())) {
+                        System.out.println("USER MAIL ALREADY IN USE");
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                        control = true;
+                        ui();
+                    }
+                }
             }
+            validMail = true;
+
         } while (!validMail);
 
-        Iterator<String> iterator = this.mailList.iterator();
-        while (iterator.hasNext()) {
-            String dummyMail = iterator.next();
-            if (dummyMail.equals(userMail)) {
-                System.out.println("USER MAIL ALREADY IN USE");
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                control = true;
-                ui();
-            }
-        }
+
         if (control) {
             System.exit(0);
         }
@@ -640,15 +642,15 @@ public class TheSocialMedia {
                                 System.out.println("*                                                        *");
                                 System.out.print("* >>> ");
                                 String videoQualityAnswer = Input.string();
-                                if(!videoQualityAnswer.trim().equals('1') || !videoQualityAnswer.trim().equals('2') || !videoQualityAnswer.trim().equals('3')){
+                                if (!videoQualityAnswer.trim().equals('1') || !videoQualityAnswer.trim().equals('2') || !videoQualityAnswer.trim().equals('3')) {
                                     System.out.println("INVALID QUALITY");
                                     try {
                                         Thread.sleep(2000);
                                     } catch (InterruptedException ex) {
                                         throw new RuntimeException(ex);
                                     }
-                                }else{
-                                    switch (videoQualityAnswer){
+                                } else {
+                                    switch (videoQualityAnswer) {
                                         case "1":
                                             System.out.println("LOW QUALITY SELECTED");
                                             q = Quality.LOW;
@@ -666,7 +668,7 @@ public class TheSocialMedia {
                                 } catch (InterruptedException ex) {
                                     throw new RuntimeException(ex);
                                 }
-                            }while(!validQuality);
+                            } while (!validQuality);
 
                             System.out.println("*********************THE SOCIAL MEDIA*********************");
                             System.out.println("*********************   POSTS MENU   *********************");

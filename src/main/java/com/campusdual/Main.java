@@ -15,6 +15,8 @@ public class Main {
         User u3 = new User("user3", "mail3", "pass3");
         User u4 = new User("user4", "mail4", "pass4");
         User u5 = new User("user5", "mail5", "pass5");
+
+        //NOTE: THE DUMMYUSERS MAILS, NAMES AND PASSWORDS HAVEN'T BEEN ADDED TO THE PROPER LISTS SO ANOTHER USER WITH THE SAME MAIL CAN LOG IN
         ua.add(u1);
         ua.add(u2);
         ua.add(u3);
