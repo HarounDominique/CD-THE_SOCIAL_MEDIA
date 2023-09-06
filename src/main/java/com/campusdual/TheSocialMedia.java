@@ -1,5 +1,6 @@
 package com.campusdual;
 
+import java.sql.SQLOutput;
 import java.util.*;
 
 import com.campusdual.PostSupportClasses.ImageDimensions;
@@ -538,75 +539,166 @@ public class TheSocialMedia {
                             //control = true;
                             break;
                         default:
-                            switch (imagePostTitle.trim()) {
-                                case "0":
-                                    break;
-                                default:
 
-                                    System.out.println("*********************THE SOCIAL MEDIA*********************");
-                                    System.out.println("*********************   POSTS MENU   *********************");
-                                    System.out.println("********************* NEW IMAGE POST *********************");
-                                    System.out.println("* USER: " + userName + " | STATUS: LOGGED");
-                                    System.out.println("*                                                        *");
-                                    System.out.println("*              Insert the width of the image             *");
-                                    System.out.println("*                                                        *");
-                                    System.out.print("* >>> ");
-                                    String imageWidthAnswer = Input.string();
-                                    int imageWidth = 600;
-                                    try {
-                                        imageWidth = Integer.parseInt(imageWidthAnswer);
-                                        // Continuar con el código si la conversión tiene éxito
-                                    } catch (NumberFormatException e) {
-                                        System.err.println("ERROR: COULD NOT CONVERT TO INTEGER. A DEFAULT VALUE WILL BE USED (600).");
-                                    }
-                                    imageWidth = 600;
-
-                                    try {
-                                        Thread.sleep(2000);
-                                    } catch (InterruptedException ex) {
-                                        throw new RuntimeException(ex);
-                                    }
-
-                                    System.out.println("*********************THE SOCIAL MEDIA*********************");
-                                    System.out.println("*********************   POSTS MENU   *********************");
-                                    System.out.println("********************* NEW IMAGE POST *********************");
-                                    System.out.println("* USER: " + userName + " | STATUS: LOGGED");
-                                    System.out.println("*                                                        *");
-                                    System.out.println("*             Insert the height of the image             *");
-                                    System.out.println("*                                                        *");
-                                    System.out.print("* >>> ");
-                                    String imageHeightAnswer = Input.string();
-                                    int imageHeight = 200;
-                                    try {
-                                        imageHeight = Integer.parseInt(imageHeightAnswer);
-                                        // Continuar con el código si la conversión tiene éxito
-                                    } catch (NumberFormatException e) {
-                                        System.err.println("ERROR: COULD NOT CONVERT TO INTEGER. A DEFAULT VALUE WILL BE USED (200).");
-                                    }
-                                    imageHeight = 200;
-
-                                    try {
-                                        Thread.sleep(2000);
-                                    } catch (InterruptedException ex) {
-                                        throw new RuntimeException(ex);
-                                    }
-
-                                    Calendar c = Calendar.getInstance();
-                                    Date d = c.getTime();
-
-                                    ImageDimensions id = new ImageDimensions(imageHeight, imageWidth);
-
-                                    ImageContentPost icp = new ImageContentPost(imagePostTitle, id);
-
-                                    Post p = new Post(d, icp, u);
-
-                                    u.addPost(p);
+                            System.out.println("*********************THE SOCIAL MEDIA*********************");
+                            System.out.println("*********************   POSTS MENU   *********************");
+                            System.out.println("********************* NEW IMAGE POST *********************");
+                            System.out.println("* USER: " + userName + " | STATUS: LOGGED");
+                            System.out.println("*                                                        *");
+                            System.out.println("*              Insert the width of the image:             *");
+                            System.out.println("*                                                        *");
+                            System.out.print("* >>> ");
+                            String imageWidthAnswer = Input.string();
+                            int imageWidth = 600;
+                            try {
+                                imageWidth = Integer.parseInt(imageWidthAnswer);
+                                // Continuar con el código si la conversión tiene éxito
+                            } catch (NumberFormatException e) {
+                                System.err.println("ERROR: COULD NOT CONVERT TO INTEGER. A DEFAULT VALUE WILL BE USED (600).");
                             }
-                            break;
+                            imageWidth = 600;
+
+                            try {
+                                Thread.sleep(2000);
+                            } catch (InterruptedException ex) {
+                                throw new RuntimeException(ex);
+                            }
+
+                            System.out.println("*********************THE SOCIAL MEDIA*********************");
+                            System.out.println("*********************   POSTS MENU   *********************");
+                            System.out.println("********************* NEW IMAGE POST *********************");
+                            System.out.println("* USER: " + userName + " | STATUS: LOGGED");
+                            System.out.println("*                                                        *");
+                            System.out.println("*             Insert the height of the image:             *");
+                            System.out.println("*                                                        *");
+                            System.out.print("* >>> ");
+                            String imageHeightAnswer = Input.string();
+                            int imageHeight = 200;
+                            try {
+                                imageHeight = Integer.parseInt(imageHeightAnswer);
+                                // Continuar con el código si la conversión tiene éxito
+                            } catch (NumberFormatException e) {
+                                System.err.println("ERROR: COULD NOT CONVERT TO INTEGER. A DEFAULT VALUE WILL BE USED (200).");
+                            }
+                            imageHeight = 200;
+
+                            try {
+                                Thread.sleep(2000);
+                            } catch (InterruptedException ex) {
+                                throw new RuntimeException(ex);
+                            }
+
+                            Calendar c = Calendar.getInstance();
+                            Date d = c.getTime();
+
+                            ImageDimensions id = new ImageDimensions(imageHeight, imageWidth);
+
+                            ImageContentPost icp = new ImageContentPost(imagePostTitle, id);
+
+                            Post p = new Post(d, icp, u);
+
+                            u.addPost(p);
                     }
                     break;
+
                 case "3":
-                    // TODO: 05/09/2023 create a video post
+                    System.out.println("*********************THE SOCIAL MEDIA*********************");
+                    System.out.println("*********************   POSTS MENU   *********************");
+                    System.out.println("********************* NEW VIDEO POST *********************");
+                    System.out.println("* USER: " + userName + " | STATUS: LOGGED");
+                    System.out.println("*                                                        *");
+                    System.out.println("*                  Insert '0' to GO BACK                 *");
+                    System.out.println("*                                                        *");
+                    System.out.println("*              Or write the title of the post:           *");
+                    System.out.println("*                                                        *");
+                    System.out.print("* >>> ");
+                    String videoPostTitle = Input.string();
+                    switch (videoPostTitle.trim()) {
+                        case "0":
+                            //control = true;
+                            break;
+                        default:
+                            boolean validQuality = false;
+
+                            do {
+                                System.out.println("*********************THE SOCIAL MEDIA*********************");
+                                System.out.println("*********************   POSTS MENU   *********************");
+                                System.out.println("********************* NEW VIDEO POST *********************");
+                                System.out.println("* USER: " + userName + " | STATUS: LOGGED");
+                                System.out.println("*                                                        *");
+                                System.out.println("*             Choose the quality of the video:           *");
+                                System.out.println("*                                                        *");
+                                System.out.println("*                Insert '1' for LOW quality              *");
+                                System.out.println("*                                                        *");
+                                System.out.println("*              Insert '2' for MEDIUM quality             *");
+                                System.out.println("*                                                        *");
+                                System.out.println("*                Insert '3' for HIGH quality             *");
+                                System.out.println("*                                                        *");
+                                System.out.print("* >>> ");
+                                String videoQualityAnswer = Input.string();
+                                if(!videoQualityAnswer.trim().equals('1') || !videoQualityAnswer.trim().equals('2') || !videoQualityAnswer.trim().equals('3')){
+                                    System.out.println("INVALID QUALITY");
+                                    try {
+                                        Thread.sleep(2000);
+                                    } catch (InterruptedException ex) {
+                                        throw new RuntimeException(ex);
+                                    }
+                                }else{
+                                    switch (videoQualityAnswer){
+                                        case "1":
+                                            System.out.println("LOW QUALITY SELECTED");
+                                        case "2":
+                                            System.out.println("MEDIUM QUALITY SELECTED");
+                                        case "3":
+                                            System.out.println("HIGH QUALITY SELECTED");
+                                    }
+                                    validQuality = true;
+                                }
+                                try {
+                                    Thread.sleep(2000);
+                                } catch (InterruptedException ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                            }while(!validQuality);
+
+                            System.out.println("*********************THE SOCIAL MEDIA*********************");
+                            System.out.println("*********************   POSTS MENU   *********************");
+                            System.out.println("********************* NEW VIDEO POST *********************");
+                            System.out.println("* USER: " + userName + " | STATUS: LOGGED");
+                            System.out.println("*                                                        *");
+                            System.out.println("*      Insert the duration of the video in seconds       *");
+                            System.out.println("*                                                        *");
+                            System.out.print("* >>> ");
+                            String imageHeightAnswer = Input.string();
+                            int imageHeight = 200;
+                            try {
+                                imageHeight = Integer.parseInt(imageHeightAnswer);
+                                // Continuar con el código si la conversión tiene éxito
+                            } catch (NumberFormatException e) {
+                                System.err.println("ERROR: COULD NOT CONVERT TO INTEGER. A DEFAULT VALUE WILL BE USED (200).");
+                            }
+                            imageHeight = 200;
+
+                            try {
+                                Thread.sleep(2000);
+                            } catch (InterruptedException ex) {
+                                throw new RuntimeException(ex);
+                            }
+
+                            Calendar c = Calendar.getInstance();
+                            Date d = c.getTime();
+
+                            ImageDimensions id = new ImageDimensions(imageHeight, imageWidth);
+
+                            ImageContentPost icp = new ImageContentPost(videoPostTitle, id);
+
+                            Post p = new Post(d, icp, u);
+
+                            u.addPost(p);
+                    }
+                    break;
+
+
                 default:
                     System.out.println("NON-EXISTENT COMMAND");
                     try {

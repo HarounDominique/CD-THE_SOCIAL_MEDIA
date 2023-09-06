@@ -1,5 +1,6 @@
 package com.campusdual;
 
+import com.campusdual.PostSupportClasses.Quality;
 import com.campusdual.util.Input;
 
 import java.util.ArrayList;
