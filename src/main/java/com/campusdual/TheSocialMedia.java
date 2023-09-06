@@ -445,7 +445,8 @@ public class TheSocialMedia {
                     newPost(u);
                     break;
                 case "2":
-                    usersMenu(u);
+                    //todo work here
+                    u.showAllPost();
                     break;
                 default:
                     System.out.println("NON-EXISTENT COMMAND");
@@ -563,7 +564,7 @@ public class TheSocialMedia {
                             imageWidth = 600;
 
                             try {
-                                Thread.sleep(2000);
+                                Thread.sleep(500);
                             } catch (InterruptedException ex) {
                                 throw new RuntimeException(ex);
                             }
@@ -587,7 +588,7 @@ public class TheSocialMedia {
                             imageHeight = 200;
 
                             try {
-                                Thread.sleep(2000);
+                                Thread.sleep(500);
                             } catch (InterruptedException ex) {
                                 throw new RuntimeException(ex);
                             }
@@ -641,8 +642,8 @@ public class TheSocialMedia {
                                 System.out.println("*                Insert '3' for HIGH quality             *");
                                 System.out.println("*                                                        *");
                                 System.out.print("* >>> ");
-                                String videoQualityAnswer = Input.string();
-                                if (!videoQualityAnswer.trim().equals('1') || !videoQualityAnswer.trim().equals('2') || !videoQualityAnswer.trim().equals('3')) {
+                                int videoQualityAnswer = Input.integer();
+                                if (videoQualityAnswer!=1 && videoQualityAnswer!=2 && videoQualityAnswer!=3) {
                                     System.out.println("INVALID QUALITY");
                                     try {
                                         Thread.sleep(2000);
@@ -651,15 +652,18 @@ public class TheSocialMedia {
                                     }
                                 } else {
                                     switch (videoQualityAnswer) {
-                                        case "1":
+                                        case 1:
                                             System.out.println("LOW QUALITY SELECTED");
                                             q = Quality.LOW;
-                                        case "2":
+                                            break;
+                                        case 2:
                                             System.out.println("MEDIUM QUALITY SELECTED");
                                             q = Quality.MEDIUM;
-                                        case "3":
+                                            break;
+                                        case 3:
                                             System.out.println("HIGH QUALITY SELECTED");
                                             q = Quality.HIGH;
+                                            break;
                                     }
                                     validQuality = true;
                                 }

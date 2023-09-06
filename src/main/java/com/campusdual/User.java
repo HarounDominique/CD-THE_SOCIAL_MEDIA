@@ -1,5 +1,8 @@
 package com.campusdual;
 
+import com.campusdual.util.Input;
+
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -137,17 +140,72 @@ public class User {
     public void showAllPost(){
         //return getPosts();
         Iterator<Post> iterator = this.posts.iterator();
+        int index=0;
+        System.out.println("*********************THE SOCIAL MEDIA*********************");
+        System.out.println("*********************   POSTS MENU   *********************");
+        System.out.println("*********************   ALL  POSTS   *********************");
+        System.out.println("* USER: " + this.name + " | STATUS: LOGGED");
+        System.out.println("*                                                        *");
+        System.out.println("*                  Insert '0' to GO BACK                 *");
+        System.out.println("*                                                        *");
+        //System.out.print("* >>> ");
+        String answer = Input.string();
         while(iterator.hasNext()){
+            index++;
             Post p = iterator.next();
             switch (p.getId()){
                 case 1:
                     //string post
-                    //todo show the post properly
+                    System.out.println("********************* POST  #"+index+" *********************");
+                    System.out.println("* > POST DATE: "+p.getDate());
+                    System.out.println("* > AUTHOR: "+ p.getCreator());
+                    System.out.println("*                                                        *");
+                    System.out.println("* > CONTENT:                                             *");
+                    System.out.println("* "+p.getStringContentPost()+"\n");
 
                 case 2:
                     //image post
+                    System.out.println("********************* POST  #"+index+" *********************");
+                    System.out.println("* > POST DATE: "+p.getDate());
+                    System.out.println("* > AUTHOR: "+ p.getCreator());
+                    System.out.println("*                                                        *");
+                    System.out.println("* > TITLE:                                               *");
+                    System.out.println("* "+p.getImageContentPost().getTitle());
+                    System.out.println("* > IMAGE DIMENSIONS:                                    *");
+                    System.out.println("* "+p.getImageContentPost().getDimensions().getWidth()+" x "+p.getImageContentPost().getDimensions().getHeight()+"\n");
                 case 3:
                     //video post
+                    int timeUnity=0; //seconds
+                    double duration = 0;
+                    System.out.println("********************* POST  #"+index+" *********************");
+                    System.out.println("* > POST DATE: "+p.getDate());
+                    System.out.println("* > AUTHOR: "+ p.getCreator());
+                    System.out.println("*                                                        *");
+                    System.out.println("* > TITLE:                                               *");
+                    System.out.println("* "+p.getVideoContentPost().getTitle());
+                    System.out.println("* > VIDEO QUALITY:                                    *");
+                    System.out.println("* "+p.getVideoContentPost().getQuality().toString());
+                    System.out.println("* > VIDEO DURATION (SECONDS):                               *");
+                    if(p.getVideoContentPost().getDuration()>=60){
+                        timeUnity = 1; //minutes
+                        duration = p.getVideoContentPost().getDuration()/60;
+                        if(duration>=60){
+                            timeUnity = 2; //hours
+                            duration = duration/60;
+                            if(duration >=24){
+                                timeUnity = 3; //days
+                                duration = duration/24;
+                            }
+                        }
+                    }
+                    switch (timeUnity){
+                        case 0:
+                            System.out.println("* "+duration+" seconds.\n");
+                        case 1:
+                            System.out.println("* "+duration+" minutes.\n");
+                        case 3:
+                            System.out.println("* "+duration+" hours.\n");
+                    }
             }
         }
     }
