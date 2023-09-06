@@ -468,7 +468,6 @@ public class TheSocialMedia {
 
         boolean on = true;
         String userName = u.getName();
-        System.out.println("WELCOME BACK " + userName);
         do {
             System.out.println("*********************THE SOCIAL MEDIA*********************");
             System.out.println("*********************   POSTS MENU   *********************");
@@ -502,30 +501,26 @@ public class TheSocialMedia {
                     System.out.println("*                                                        *");
                     System.out.print("* >>> ");
                     String textPostAnswer = Input.string();
-                    switch (textPostAnswer.trim()) {
-                        case "0":
-                            //control = true;
-                            break;
-                        default:
-                            StringContentPost sp = new StringContentPost(textPostAnswer);
-                            Calendar c = Calendar.getInstance();
-                            Date d = c.getTime();
-                            Post p = new Post(d, sp, u);
-                            u.addPost(p);
+
+                    StringContentPost sp = new StringContentPost(textPostAnswer);
+                    Calendar c = Calendar.getInstance();
+                    Date d = c.getTime();
+                    Post p = new Post(d, sp, u);
+                    u.addPost(p);
                             /*
                             for(Post post : u.getPosts()){
                                 //post.
                             }
 
                              */
-                            System.out.println("TEXT POSTED");
-                            try {
-                                Thread.sleep(2000);
-                            } catch (InterruptedException e) {
-                                throw new RuntimeException(e);
-                            }
+                    System.out.println("TEXT POSTED");
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
                     }
                     break;
+
 
                 case "2":
                     System.out.println("*********************THE SOCIAL MEDIA*********************");
@@ -543,8 +538,8 @@ public class TheSocialMedia {
                         case "0":
                             //control = true;
                             break;
-                        default:
 
+                        default:
                             System.out.println("*********************THE SOCIAL MEDIA*********************");
                             System.out.println("*********************   POSTS MENU   *********************");
                             System.out.println("********************* NEW IMAGE POST *********************");
@@ -561,7 +556,6 @@ public class TheSocialMedia {
                             } catch (NumberFormatException e) {
                                 System.err.println("ERROR: COULD NOT CONVERT TO INTEGER. A DEFAULT VALUE WILL BE USED (600).");
                             }
-                            imageWidth = 600;
 
                             try {
                                 Thread.sleep(500);
@@ -585,24 +579,25 @@ public class TheSocialMedia {
                             } catch (NumberFormatException e) {
                                 System.err.println("ERROR: COULD NOT CONVERT TO INTEGER. A DEFAULT VALUE WILL BE USED (200).");
                             }
-                            imageHeight = 200;
+
+                            Calendar ca = Calendar.getInstance();
+                            Date da = ca.getTime();
+
+                            ImageDimensions id = new ImageDimensions(imageHeight, imageWidth);
+
+                            ImageContentPost icp = new ImageContentPost(imagePostTitle, id);
+
+                            Post po = new Post(da, icp, u);
+
+                            u.addPost(po);
+
+                            System.out.println("IMAGE POSTED");
 
                             try {
                                 Thread.sleep(500);
                             } catch (InterruptedException ex) {
                                 throw new RuntimeException(ex);
                             }
-
-                            Calendar c = Calendar.getInstance();
-                            Date d = c.getTime();
-
-                            ImageDimensions id = new ImageDimensions(imageHeight, imageWidth);
-
-                            ImageContentPost icp = new ImageContentPost(imagePostTitle, id);
-
-                            Post p = new Post(d, icp, u);
-
-                            u.addPost(p);
                     }
                     break;
 
@@ -643,7 +638,8 @@ public class TheSocialMedia {
                                 System.out.println("*                                                        *");
                                 System.out.print("* >>> ");
                                 int videoQualityAnswer = Input.integer();
-                                if (videoQualityAnswer!=1 && videoQualityAnswer!=2 && videoQualityAnswer!=3) {
+                                //todo añadir try para evitar que si se introducen letras pete por todas partes
+                                if (videoQualityAnswer != 1 && videoQualityAnswer != 2 && videoQualityAnswer != 3) {
                                     System.out.println("INVALID QUALITY");
                                     try {
                                         Thread.sleep(2000);
@@ -668,7 +664,7 @@ public class TheSocialMedia {
                                     validQuality = true;
                                 }
                                 try {
-                                    Thread.sleep(2000);
+                                    Thread.sleep(500);
                                 } catch (InterruptedException ex) {
                                     throw new RuntimeException(ex);
                                 }
@@ -684,29 +680,29 @@ public class TheSocialMedia {
                             System.out.print("* >>> ");
                             String videoDurationAnswer = Input.string();
 
-                            int videoDuration;
+                            int videoDuration = 60;
                             try {
                                 videoDuration = Integer.parseInt(videoDurationAnswer.trim());
                                 // Continuar con el código si la conversión tiene éxito
                             } catch (NumberFormatException e) {
-                                System.err.println("ERROR: COULD NOT CONVERT TO INTEGER. A DEFAULT VALUE WILL BE USED (60).");
-                            }
-                            videoDuration = 60;
-
-                            try {
-                                Thread.sleep(2000);
-                            } catch (InterruptedException ex) {
-                                throw new RuntimeException(ex);
+                                System.err.println("ERROR: MISMATCH FORMAT. A DEFAULT VALUE WILL BE USED (60).");
                             }
 
-                            Calendar c = Calendar.getInstance();
-                            Date d = c.getTime();
+                            Calendar cal = Calendar.getInstance();
+                            Date dat = cal.getTime();
 
                             VideoContentPost vcp = new VideoContentPost(videoPostTitle, q, videoDuration);
 
-                            Post p = new Post(d, vcp, u);
+                            Post pos = new Post(dat, vcp, u);
 
-                            u.addPost(p);
+                            u.addPost(pos);
+
+                            System.out.println("VIDEO POSTED");
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException ex) {
+                                throw new RuntimeException(ex);
+                            }
                     }
                     break;
 

@@ -158,7 +158,7 @@ public class User {
                     //string post
                     System.out.println("********************* POST  #"+index+" *********************");
                     System.out.println("* > POST DATE: "+p.getDate());
-                    System.out.println("* > AUTHOR: "+ p.getCreator());
+                    System.out.println("* > AUTHOR: "+ p.getCreator().getName());
                     System.out.println("*                                                        *");
                     System.out.println("* > CONTENT:                                             *");
                     System.out.println("* "+p.getStringContentPost()+"\n");
@@ -167,7 +167,7 @@ public class User {
                     //image post
                     System.out.println("********************* POST  #"+index+" *********************");
                     System.out.println("* > POST DATE: "+p.getDate());
-                    System.out.println("* > AUTHOR: "+ p.getCreator());
+                    System.out.println("* > AUTHOR: "+ p.getCreator().getName());
                     System.out.println("*                                                        *");
                     System.out.println("* > TITLE:                                               *");
                     System.out.println("* "+p.getImageContentPost().getTitle());
@@ -179,7 +179,7 @@ public class User {
                     double duration = 0;
                     System.out.println("********************* POST  #"+index+" *********************");
                     System.out.println("* > POST DATE: "+p.getDate());
-                    System.out.println("* > AUTHOR: "+ p.getCreator());
+                    System.out.println("* > AUTHOR: "+ p.getCreator().getName());
                     System.out.println("*                                                        *");
                     System.out.println("* > TITLE:                                               *");
                     System.out.println("* "+p.getVideoContentPost().getTitle());
