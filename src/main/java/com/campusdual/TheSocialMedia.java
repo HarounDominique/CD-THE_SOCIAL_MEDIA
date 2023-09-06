@@ -637,9 +637,10 @@ public class TheSocialMedia {
                                 System.out.println("*                Insert '3' for HIGH quality             *");
                                 System.out.println("*                                                        *");
                                 System.out.print("* >>> ");
-                                int videoQualityAnswer = Input.integer();
+                                String videoQualityAnswer = Input.string();
                                 //todo añadir try para evitar que si se introducen letras pete por todas partes
-                                if (videoQualityAnswer != 1 && videoQualityAnswer != 2 && videoQualityAnswer != 3) {
+
+                                if (!videoQualityAnswer.equals("1") && !videoQualityAnswer.equals("2") && !videoQualityAnswer.equals("3")) {
                                     System.out.println("INVALID QUALITY");
                                     try {
                                         Thread.sleep(2000);
@@ -648,15 +649,15 @@ public class TheSocialMedia {
                                     }
                                 } else {
                                     switch (videoQualityAnswer) {
-                                        case 1:
+                                        case "1":
                                             System.out.println("LOW QUALITY SELECTED");
                                             q = Quality.LOW;
                                             break;
-                                        case 2:
+                                        case "2":
                                             System.out.println("MEDIUM QUALITY SELECTED");
                                             q = Quality.MEDIUM;
                                             break;
-                                        case 3:
+                                        case "3":
                                             System.out.println("HIGH QUALITY SELECTED");
                                             q = Quality.HIGH;
                                             break;

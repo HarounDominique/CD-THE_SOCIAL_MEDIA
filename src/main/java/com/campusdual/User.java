@@ -201,10 +201,13 @@ public class User {
                     switch (timeUnity){
                         case 0:
                             System.out.println("* "+duration+" seconds.\n");
+                            break;
                         case 1:
                             System.out.println("* "+duration+" minutes.\n");
+                            break;
                         case 3:
                             System.out.println("* "+duration+" hours.\n");
+                            break;
                     }
             }
         }
