@@ -4,8 +4,10 @@ import java.sql.SQLOutput;
 import java.util.*;
 
 import com.campusdual.PostSupportClasses.ImageDimensions;
+import com.campusdual.PostSupportClasses.Quality;
 import com.campusdual.PostTypeClasses.ImageContentPost;
 import com.campusdual.PostTypeClasses.StringContentPost;
+import com.campusdual.PostTypeClasses.VideoContentPost;
 import com.campusdual.util.Input;
 
 public class TheSocialMedia {
@@ -551,7 +553,7 @@ public class TheSocialMedia {
                             String imageWidthAnswer = Input.string();
                             int imageWidth = 600;
                             try {
-                                imageWidth = Integer.parseInt(imageWidthAnswer);
+                                imageWidth = Integer.parseInt(imageWidthAnswer.trim());
                                 // Continuar con el código si la conversión tiene éxito
                             } catch (NumberFormatException e) {
                                 System.err.println("ERROR: COULD NOT CONVERT TO INTEGER. A DEFAULT VALUE WILL BE USED (600).");
@@ -575,7 +577,7 @@ public class TheSocialMedia {
                             String imageHeightAnswer = Input.string();
                             int imageHeight = 200;
                             try {
-                                imageHeight = Integer.parseInt(imageHeightAnswer);
+                                imageHeight = Integer.parseInt(imageHeightAnswer.trim());
                                 // Continuar con el código si la conversión tiene éxito
                             } catch (NumberFormatException e) {
                                 System.err.println("ERROR: COULD NOT CONVERT TO INTEGER. A DEFAULT VALUE WILL BE USED (200).");
@@ -602,6 +604,8 @@ public class TheSocialMedia {
                     break;
 
                 case "3":
+                    Quality q = Quality.LOW; //initialized in LOW by default JIC
+
                     System.out.println("*********************THE SOCIAL MEDIA*********************");
                     System.out.println("*********************   POSTS MENU   *********************");
                     System.out.println("********************* NEW VIDEO POST *********************");
@@ -647,10 +651,13 @@ public class TheSocialMedia {
                                     switch (videoQualityAnswer){
                                         case "1":
                                             System.out.println("LOW QUALITY SELECTED");
+                                            q = Quality.LOW;
                                         case "2":
                                             System.out.println("MEDIUM QUALITY SELECTED");
+                                            q = Quality.MEDIUM;
                                         case "3":
                                             System.out.println("HIGH QUALITY SELECTED");
+                                            q = Quality.HIGH;
                                     }
                                     validQuality = true;
                                 }
@@ -669,15 +676,16 @@ public class TheSocialMedia {
                             System.out.println("*      Insert the duration of the video in seconds       *");
                             System.out.println("*                                                        *");
                             System.out.print("* >>> ");
-                            String imageHeightAnswer = Input.string();
-                            int imageHeight = 200;
+                            String videoDurationAnswer = Input.string();
+
+                            int videoDuration;
                             try {
-                                imageHeight = Integer.parseInt(imageHeightAnswer);
+                                videoDuration = Integer.parseInt(videoDurationAnswer.trim());
                                 // Continuar con el código si la conversión tiene éxito
                             } catch (NumberFormatException e) {
-                                System.err.println("ERROR: COULD NOT CONVERT TO INTEGER. A DEFAULT VALUE WILL BE USED (200).");
+                                System.err.println("ERROR: COULD NOT CONVERT TO INTEGER. A DEFAULT VALUE WILL BE USED (60).");
                             }
-                            imageHeight = 200;
+                            videoDuration = 60;
 
                             try {
                                 Thread.sleep(2000);
@@ -688,11 +696,9 @@ public class TheSocialMedia {
                             Calendar c = Calendar.getInstance();
                             Date d = c.getTime();
 
-                            ImageDimensions id = new ImageDimensions(imageHeight, imageWidth);
+                            VideoContentPost vcp = new VideoContentPost(videoPostTitle, q, videoDuration);
 
-                            ImageContentPost icp = new ImageContentPost(videoPostTitle, id);
-
-                            Post p = new Post(d, icp, u);
+                            Post p = new Post(d, vcp, u);
 
                             u.addPost(p);
                     }
